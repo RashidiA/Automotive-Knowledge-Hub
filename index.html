@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automotive Knowledge Hub</title>
+<meta name="description" content="Learn automotive engineering and try real simulators: car anatomy, welding, robots, CAD, ergonomics and quality.">
+<style>
+:root{--bg:#070d1a;--bg2:#0c1527;--card:#111c33;--card2:#172545;--line:#243558;--fg:#e9eefb;--dim:#94a5c8;--a:#4da3ff;--b:#8b5cf6;--c:#22d3a6;--shadow:0 12px 34px rgba(0,0,0,.4)}
+:root[data-theme="light"]{--bg:#f2f5fb;--bg2:#e6ecf8;--card:#fff;--card2:#f4f7ff;--line:#d5def0;--fg:#13203b;--dim:#586a8c;--a:#1769e0;--b:#6d3fe8;--c:#07906f;--shadow:0 10px 26px rgba(30,60,120,.13)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--fg);background:var(--bg);transition:background .3s,color .3s;line-height:1.5}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(900px 500px at 85% -5%,color-mix(in srgb,var(--b) 24%,transparent),transparent 60%),radial-gradient(800px 500px at -5% 8%,color-mix(in srgb,var(--a) 22%,transparent),transparent 60%)}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+a{color:inherit}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:14px;height:60px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.02em;text-decoration:none}
+.logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center}
+.logo i svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.links{margin-left:auto;display:flex;gap:4px;align-items:center}
+.links a{text-decoration:none;font-size:14px;color:var(--dim);padding:7px 12px;border-radius:9px;transition:.2s}
+.links a:hover,.links a.on{color:var(--fg);background:var(--card)}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;padding:8px 13px;font:inherit;font-size:13px;cursor:pointer;transition:.2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover,.btn:focus-visible{border-color:var(--a);transform:translateY(-1px);outline:none}
+.btn.pri{background:linear-gradient(90deg,var(--a),var(--b));border-color:transparent;color:#fff;font-weight:600}
+@media(max-width:760px){.links a:not(.keep){display:none}}
+.hero{padding:70px 0 40px;text-align:center}
+.pill{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 12%,transparent);padding:5px 12px;border-radius:999px;margin-bottom:18px}
+.hero h1{margin:0 0 14px;font-size:clamp(32px,6vw,60px);line-height:1.05;letter-spacing:-.02em}
+.grad{background:linear-gradient(90deg,var(--a),var(--b),var(--c),var(--a));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 9s linear infinite}
+@keyframes flow{to{background-position:250% 0}}
+.hero p{max-width:660px;margin:0 auto 26px;color:var(--dim);font-size:clamp(15px,2vw,18px)}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cta .btn{padding:12px 20px;font-size:15px;border-radius:12px}
+.stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:38px 0 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 22px;min-width:130px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:28px;font-variant-numeric:tabular-nums}.stat span{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+section{padding:46px 0}
+h2.sec{font-size:clamp(22px,3.4vw,32px);margin:0 0 6px}
+.sub{color:var(--dim);margin:0 0 24px;max-width:680px}
+/* learning path */
+.path{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;counter-reset:s}
+.step{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;cursor:pointer;transition:.2s;text-align:left;color:inherit;font:inherit}
+.step:hover,.step[aria-pressed="true"]{border-color:var(--sc);transform:translateY(-3px);box-shadow:0 12px 28px color-mix(in srgb,var(--sc) 26%,transparent)}
+.step[aria-pressed="true"]{background:linear-gradient(160deg,color-mix(in srgb,var(--sc) 16%,var(--card)),var(--card))}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:14px;right:16px;font-weight:800;font-size:26px;color:color-mix(in srgb,var(--sc) 50%,transparent)}
+.step b{display:block;font-size:16px;margin-bottom:4px;color:var(--sc)}.step span{font-size:13px;color:var(--dim)}
+/* toolbar */
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:26px 0 16px}
+.search{position:relative;flex:1 1 240px;max-width:380px}
+.search input{width:100%;padding:11px 14px 11px 38px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-size:14px}
+.search input:focus{outline:2px solid var(--a);border-color:transparent}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--dim);fill:none;stroke-width:2}
+.chip{border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:999px;padding:7px 14px;font:inherit;font-size:13px;cursor:pointer;transition:.2s}
+.chip:hover{color:var(--fg);border-color:var(--a)}.chip[aria-pressed="true"]{background:var(--a);border-color:var(--a);color:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+.card{position:relative;display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:18px;background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;transition:transform .15s,border-color .2s,box-shadow .2s;animation:rise .5s both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(280px circle at var(--mx,50%) var(--my,0%),color-mix(in srgb,var(--c1) 26%,transparent),transparent 65%);opacity:0;transition:opacity .25s;pointer-events:none}
+.card:hover::before{opacity:1}.card:hover{border-color:var(--c1);box-shadow:0 14px 36px color-mix(in srgb,var(--c1) 28%,transparent)}
+.card.hide{display:none}
+.top{display:flex;align-items:center;gap:14px}
+.ic{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--c1) 18%,transparent);border:1px solid color-mix(in srgb,var(--c1) 55%,transparent)}
+.ic svg{width:29px;height:29px;stroke:var(--c1);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.card h3{margin:0;font-size:18px;line-height:1.25}
+.kind{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--c1);font-weight:700}
+.card p{margin:0;color:var(--dim);font-size:14px;flex:1}
+.learn{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:13px;color:var(--dim)}
+.learn li::before{content:"✓";color:var(--c1);font-weight:800;margin-right:7px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--dim)}
+.tag.cam{color:#ffb454;border-color:color-mix(in srgb,#ffb454 45%,transparent)}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.acts .btn{flex:1;justify-content:center;min-width:120px}
+.acts .launch{background:var(--c1);border-color:var(--c1);color:#fff;font-weight:700}
+.note{font-size:12px;color:var(--dim)}
+.badge{position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:999px;background:linear-gradient(90deg,#ff7a45,#ff3d71);color:#fff}
+.empty{display:none;text-align:center;color:var(--dim);padding:40px 0}
+/* glossary flip cards */
+.gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.flip{perspective:900px;height:150px;cursor:pointer;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left}
+.flip div{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip[aria-pressed="true"] div{transform:rotateY(180deg)}
+.flip span{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:16px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;justify-content:center;font-size:13px;color:var(--dim)}
+.flip span b{font-size:17px;color:var(--fg);margin-bottom:4px}
+.flip span:last-child{transform:rotateY(180deg);background:linear-gradient(160deg,color-mix(in srgb,var(--a) 18%,var(--card)),var(--card));border-color:var(--a);color:var(--fg)}
+.flip small{display:block;margin-top:8px;color:var(--a);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+/* quiz */
+.quiz{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);max-width:760px}
+.qbar{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin-bottom:16px}.qbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--c));transition:width .4s}
+.quiz h4{margin:0 0 14px;font-size:18px}
+.opt{display:block;width:100%;text-align:left;margin:0 0 8px;padding:11px 14px;border-radius:11px;border:1px solid var(--line);background:var(--card2);color:var(--fg);font:inherit;font-size:14px;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--a)}
+.opt.ok{border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent)}.opt.no{border-color:#ff5d73;background:color-mix(in srgb,#ff5d73 16%,transparent)}
+.why{margin:10px 0 14px;font-size:13px;color:var(--dim);min-height:20px}
+.score{font-size:42px;font-weight:800}
+/* about */
+.about{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.about div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}.about b{display:block;margin-bottom:4px}.about span{color:var(--dim);font-size:14px}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:26px 0 40px;text-align:center;color:var(--dim);font-size:13px}
+footer a{color:var(--a)}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font-size:11px;background:var(--card)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding-top:44px}}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top"><i><svg viewBox="0 0 24 24"><path d="M3 15l1.5-5A2 2 0 0 1 6.4 8.5h11.2a2 2 0 0 1 1.9 1.5L21 15v3H3z"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/></svg></i>Automotive Knowledge Hub</a>
+  <div class="links">
+    <a href="#path">Learning path</a><a href="#sims" class="keep">Simulators</a><a href="#glossary">Glossary</a><a href="#quiz">Quiz</a>
+    <button class="btn" id="theme" aria-label="Toggle light or dark theme">Theme</button>
+  </div>
+</div></nav>
+
+<header class="wrap hero" id="top">
+  <span class="pill">Learn · Simulate · Build</span>
+  <h1>Learn automotive engineering by <span class="grad">trying it</span></h1>
+  <p>A free hub for students and young engineers. Explore how a car is built, welded, programmed, checked for quality and made safe for workers, using real, hands-on simulators that run in your browser.</p>
+  <div class="cta"><a class="btn pri" href="#sims">Start exploring</a><a class="btn" href="#quiz">Test yourself</a><button class="btn" id="rand">Surprise me</button></div>
+  <div class="stats">
+    <div class="stat"><b id="n1">0</b><span>Simulators</span></div>
+    <div class="stat"><b id="n2">0</b><span>Topics</span></div>
+    <div class="stat"><b id="n3">0</b><span>Key terms</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="path">
+    <h2 class="sec">Follow the journey of a car</h2>
+    <p class="sub">Pick a stage to see which simulators belong to it.</p>
+    <div class="path" id="steps"></div>
+  </section>
+
+  <section id="sims">
+    <h2 class="sec">Simulators</h2>
+    <p class="sub">Each one opens a live app. Source code for every project is open on GitHub, so you can read it, copy it and learn from it.</p>
+    <div class="bar">
+      <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="Search simulators (press / )" aria-label="Search simulators" autocomplete="off"></div>
+      <div class="chips" id="chips" role="group" aria-label="Filter by stage"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty">No simulator matches your search.</div>
+    <p class="note" style="margin-top:16px">Tip: free cloud apps go to sleep when nobody uses them. If a page says it is waking up, wait about 30 seconds and it will start. Apps marked "Webcam" ask for camera permission and work best on a laptop or desktop in good light.</p>
+  </section>
+
+  <section id="glossary">
+    <h2 class="sec">Key terms</h2>
+    <p class="sub">Tap a card to flip it.</p>
+    <div class="gl" id="gl"></div>
+  </section>
+
+  <section id="quiz">
+    <h2 class="sec">Quick quiz</h2>
+    <p class="sub">Five questions from the simulators above.</p>
+    <div class="quiz" id="qz"></div>
+  </section>
+
+  <section id="about">
+    <h2 class="sec">About this hub</h2>
+    <div class="about">
+      <div><b>Built for learning</b><span>Simulators are simplified so you can see the ideas clearly. They are for teaching, not for real design or safety decisions.</span></div>
+      <div><b>Open source</b><span>Every project has its code on GitHub. Fork it, study it, improve it.</span></div>
+      <div><b>Grow the hub</b><span>New simulators are added as they are built. Students are welcome to suggest topics.</span></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Automotive Knowledge Hub · <a href="https://github.com/RashidiA" target="_blank" rel="noopener">GitHub: RashidiA</a><br>Shortcuts: <kbd>/</kbd> search · <kbd>T</kbd> theme</div></footer>
+
+<script>
+/* ===== EDIT HERE: stages, simulators, terms and quiz ===== */
+const STAGES = [
+  { id: 'Design', title: 'Design', text: 'How a vehicle is shaped and modelled', color: '#4da3ff' },
+  { id: 'Build', title: 'Build', text: 'Robots, welding and the body shop', color: '#ff9f43' },
+  { id: 'Quality', title: 'Quality', text: 'Measure, control and improve', color: '#22d3a6' },
+  { id: 'People', title: 'People and safety', text: 'Protect the workers on the line', color: '#a78bfa' }
+];
+const SIMS = [
+  { title: 'Automotive Simulations (student version)', stage: 'Design', color: '#4da3ff', badge: 'Start here',
+    desc: 'A set of simulators in one dashboard, including the 3D Car Anatomy Lab, spot welding, welding maths, car plant process, laser seam tracking and torque monitoring.',
+    learn: ['How the six systems of a car work', 'Welding physics and adaptive control', 'Plant flow, vision tracking and torque quality'],
+    tags: ['3D', 'Beginner friendly', 'English / Malay tour'],
+    live: 'https://rashidia.github.io/Automotive-simulation-student-version/', repo: 'https://github.com/RashidiA/Automotive-simulation-student-version',
+    icon: '<path d="M3 15l1.5-5A2 2 0 0 1 6.4 8.5h11.2a2 2 0 0 1 1.9 1.5L21 15v3H3z"/><circle cx="7.5" cy="17.5" r="1.7"/><circle cx="16.5" cy="17.5" r="1.7"/>' },
+  { title: 'AR Gesture CAD Studio', stage: 'Design', color: '#38bdf8',
+    desc: 'A gesture-controlled 3D CAD workspace. Use pinch gestures in front of your webcam to move solids, import STL models, extrude sketches and combine shapes.',
+    learn: ['3D modelling basics and Boolean operations', 'Importing and measuring STL parts', 'Hand tracking as a new way to design'],
+    tags: ['Webcam', 'CAD', 'Three.js'],
+    live: 'https://ar-gesture-cad-studio-yovhcowlmh6mesydbs7wtj.streamlit.app/', repo: 'https://github.com/RashidiA/AR-Gesture-CAD-Studio',
+    icon: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>' },
+  { title: 'Industrial Robot Cloud Simulator', stage: 'Build', color: '#ff7a59',
+    desc: 'An offline programming simulator for industrial robots in automotive work such as spot welding and material handling. Move the arm in 3D and teach positions with hand gestures.',
+    learn: ['Robot kinematics and inverse kinematics', 'Setting up tools and fixtures', 'Teaching a robot program by gesture'],
+    tags: ['Webcam', 'Robotics', 'ABB / KUKA / Yaskawa'],
+    live: 'https://industrial-robot-cloud-simulator-54jggbftztagnuxosqtvzr.streamlit.app/', repo: 'https://github.com/RashidiA/Industrial-Robot-Cloud-Simulator',
+    icon: '<path d="M4 21h8"/><path d="M8 21v-6l5-5"/><path d="M13 10l4-6 3 2-3 5"/><circle cx="8" cy="15" r="1.6"/><circle cx="13" cy="10" r="1.6"/>' },
+  { title: 'Spot Weld Process Simulator', stage: 'Build', color: '#ff9f43',
+    desc: 'Maps the weld lobe for resistance spot welding of multi-layer sheet steel. Change current, time and force to see nugget growth, expulsion limits and a heat animation.',
+    learn: ['What a weld lobe is and why it matters', 'How steel grade and zinc coating change welding', 'Reading 3D and 2D process windows'],
+    tags: ['Welding', '3D plots', 'Materials'],
+    live: 'https://spot-weld-process-simulator-jogq55brt4wsqfy8sgonbp.streamlit.app/', repo: 'https://github.com/RashidiA/Spot-Weld-Process-Simulator',
+    icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>' },
+  { title: 'Process Capability Study', stage: 'Quality', color: '#22d3a6',
+    desc: 'Enter measurements and get mean, standard deviation, Cp, Cpk and expected defects per million, with a control chart, a histogram and a PDF audit report.',
+    learn: ['Cp and Cpk, and what "capable" means', 'Control charts and histograms', 'Turning data into a quality report'],
+    tags: ['Statistics', 'PDF report', 'Quality'],
+    live: 'https://process-capability-study-apjprzx7rkxtwwerctdqz3.streamlit.app/', repo: 'https://github.com/RashidiA/Process-Capability-Study',
+    icon: '<path d="M3 20h18"/><path d="M5 20V12M10 20V6M15 20v-9M20 20V9"/>' },
+  { title: 'Ergonomic Risk Evaluation (REBA)', stage: 'People', color: '#a78bfa',
+    desc: 'Uses your webcam to track body posture, scores it with the REBA method and checks lifting with the NIOSH equation. Exports a PDF audit report.',
+    learn: ['How REBA scores trunk, neck, arms and legs', 'Recommended weight limit and lifting index', 'Spotting risky postures on a line'],
+    tags: ['Webcam', 'Safety', 'AI pose tracking'],
+    live: 'https://ergonomic-risk-evaluation-reba-xugjcmzcuciyhtkz3adgbk.streamlit.app/', repo: 'https://github.com/RashidiA/Ergonomic-Risk-Evaluation-REBA',
+    icon: '<circle cx="12" cy="5" r="2.2"/><path d="M12 8v6M12 14l-3 6M12 14l3 6M7 11l5-2 5 2"/>' }
+];
+const TERMS = [
+  ['Body-in-white', 'The welded steel shell of a car before paint, doors and trim.'],
+  ['Ackermann steering', 'The inner front wheel turns more than the outer one so both tyres roll cleanly through a corner.'],
+  ['Differential', 'Splits drive between two wheels so they can turn at different speeds in a bend.'],
+  ['Weld lobe', 'The window of current and time that makes a good spot weld: too low is weak, too high throws out molten metal.'],
+  ['Weld nugget', 'The small melted-and-frozen zone that joins the metal sheets in a spot weld.'],
+  ['Dynamic resistance', 'How the electrical resistance across a spot weld changes during welding. Controllers use it to adapt.'],
+  ['Inverse kinematics', 'Working out the robot joint angles needed to put the tool at a chosen point.'],
+  ['Tool centre point (TCP)', 'The working point of a robot tool, for example the tip of a weld gun.'],
+  ['Cp and Cpk', 'Measures of how well a process fits inside its limits. Cpk 1.33 or more is normally called capable.'],
+  ['Poka-yoke', 'Error-proofing: designing a step so a mistake is impossible or is caught at once.'],
+  ['REBA', 'Rapid Entire Body Assessment: a score for how risky a working posture is.'],
+  ['Lifting Index', 'Load divided by the recommended weight limit. Above 1 means the lift is risky.']
+];
+const QUIZ = [
+  { q: 'A process has Cpk = 0.8. What does that mean?', o: ['It is capable and safe to run', 'It is not capable: too many parts will fall outside the limits', 'The process is perfectly centred', 'The sample is too small'], a: 1, w: 'Cpk below 1.00 is not capable. 1.33 or more is normally the target.' },
+  { q: 'What is the purpose of a weld lobe?', o: ['It shows the best robot speed', 'It marks the settings that give a good weld without expulsion', 'It measures paint thickness', 'It lists the steel grades'], a: 1, w: 'The lobe is the operating window of current and time (and force) that makes a good nugget.' },
+  { q: 'In Ackermann steering, which front wheel turns more in a corner?', o: ['The outer wheel', 'The inner wheel', 'Both turn the same', 'Neither: the rear wheels do'], a: 1, w: 'The inner wheel follows a tighter circle, so it must turn through a larger angle.' },
+  { q: 'What does a Lifting Index above 1 tell you?', o: ['The lift is within the safe limit', 'The load is lighter than needed', 'The lift is risky and should be redesigned', 'The worker is tall'], a: 2, w: 'Lifting Index = load / recommended weight limit. Above 1 means higher risk.' },
+  { q: 'What does inverse kinematics do for a robot?', o: ['Finds the joint angles that place the tool at a target', 'Measures the weld current', 'Counts parts on a line', 'Draws the CAD model'], a: 0, w: 'It works backwards from the wanted tool position to the joint angles.' }
+];
+
+/* ===== code below needs no editing ===== */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } } };
+let stage = 'All';
+
+/* stages */
+const steps = $('#steps');
+STAGES.forEach(s => { const b = document.createElement('button'); b.className = 'step'; b.style.setProperty('--sc', s.color); b.setAttribute('aria-pressed', 'false'); b.innerHTML = '<b>' + s.title + '</b><span>' + s.text + '</span>'; b.onclick = () => { setStage(stage === s.id ? 'All' : s.id); document.getElementById('sims').scrollIntoView({ behavior: 'smooth' }); }; steps.appendChild(b); });
+
+/* cards */
+const grid = $('#grid');
+SIMS.forEach((m, i) => {
+  const c = document.createElement('article'); c.className = 'card'; c.style.setProperty('--c1', m.color); c.style.animationDelay = (i * 70) + 'ms'; c.dataset.stage = m.stage;
+  c.dataset.s = (m.title + ' ' + m.desc + ' ' + m.stage + ' ' + m.tags.join(' ') + ' ' + m.learn.join(' ')).toLowerCase();
+  c.innerHTML = (m.badge ? '<span class="badge">' + m.badge.toUpperCase() + '</span>' : '') +
+    '<div class="top"><div class="ic"><svg viewBox="0 0 24 24">' + m.icon + '</svg></div><div><div class="kind">' + m.stage + '</div><h3>' + m.title + '</h3></div></div>' +
+    '<p>' + m.desc + '</p><ul class="learn">' + m.learn.map(x => '<li>' + x + '</li>').join('') + '</ul>' +
+    '<div class="tags">' + m.tags.map(t => '<span class="tag' + (t === 'Webcam' ? ' cam' : '') + '">' + (t === 'Webcam' ? '📷 ' : '') + t + '</span>').join('') + '</div>' +
+    '<div class="acts"><a class="btn launch" href="' + m.live + '" target="_blank" rel="noopener">Launch ↗</a><a class="btn" href="' + m.repo + '" target="_blank" rel="noopener">Code on GitHub</a></div>';
+  c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%'); c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%'); });
+  grid.appendChild(c);
+});
+const chips = $('#chips');
+['All'].concat(STAGES.map(s => s.id)).forEach(id => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = id === 'People' ? 'People and safety' : id; b.dataset.id = id; b.setAttribute('aria-pressed', id === 'All'); b.onclick = () => setStage(id); chips.appendChild(b); });
+function setStage(id) { stage = id; $$('.chip').forEach(x => x.setAttribute('aria-pressed', x.dataset.id === id)); $$('.step').forEach((x, i) => x.setAttribute('aria-pressed', STAGES[i].id === id)); apply(); }
+function apply() { const q = $('#q').value.trim().toLowerCase(); let n = 0; $$('.card').forEach(c => { const ok = (stage === 'All' || c.dataset.stage === stage) && (!q || c.dataset.s.includes(q)); c.classList.toggle('hide', !ok); if (ok) n++; }); $('#empty').style.display = n ? 'none' : 'block'; }
+$('#q').addEventListener('input', apply);
+
+/* glossary */
+$('#gl').innerHTML = TERMS.map(t => '<button class="flip" aria-pressed="false" aria-label="' + t[0] + '"><div><span><b>' + t[0] + '</b>Tap to see the meaning</span><span>' + t[1] + '<small>' + t[0] + '</small></span></div></button>').join('');
+$$('.flip').forEach(b => b.onclick = () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'));
+
+/* quiz */
+let qi = 0, sc = 0; const qz = $('#qz');
+function showQ() {
+  if (qi >= QUIZ.length) { const best = Math.max(store.get('hub.best', 0), sc); store.set('hub.best', best); qz.innerHTML = '<div class="qbar"><i style="width:100%"></i></div><div class="score">' + sc + ' / ' + QUIZ.length + '</div><p>' + (sc === QUIZ.length ? 'Perfect score. Well done!' : sc >= 3 ? 'Good work. Try the simulators to fill the gaps.' : 'Keep going. Open a simulator and try again.') + ' Best so far: ' + best + ' / ' + QUIZ.length + '.</p><button class="btn pri" id="again">Try again</button>'; $('#again').onclick = () => { qi = 0; sc = 0; showQ(); }; return; }
+  const k = QUIZ[qi]; qz.innerHTML = '<div class="qbar"><i style="width:' + (qi / QUIZ.length * 100) + '%"></i></div><small style="color:var(--dim)">Question ' + (qi + 1) + ' of ' + QUIZ.length + '</small><h4>' + k.q + '</h4>' + k.o.map((o, j) => '<button class="opt" data-j="' + j + '">' + o + '</button>').join('') + '<div class="why" aria-live="polite"></div><button class="btn pri" id="nx" hidden>' + (qi === QUIZ.length - 1 ? 'See score' : 'Next question') + '</button>';
+  $$('.opt').forEach(b => b.onclick = () => { const j = +b.dataset.j; if (j === k.a) sc++; $$('.opt').forEach(x => { x.disabled = true; if (+x.dataset.j === k.a) x.classList.add('ok'); }); if (j !== k.a) b.classList.add('no'); $('.why').textContent = (j === k.a ? 'Correct. ' : 'Not quite. ') + k.w; $('#nx').hidden = false; });
+  $('#nx').onclick = () => { qi++; showQ(); };
+}
+showQ();
+
+/* counters */
+function count(sel, to) { const el = $(sel), t0 = performance.now(); (function f(t) { const k = Math.min(1, (t - t0) / 800); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(t0); }
+count('#n1', SIMS.length); count('#n2', STAGES.length); count('#n3', TERMS.length);
+
+/* theme, random, keys, nav highlight */
+function setTheme(t) { document.documentElement.dataset.theme = t; store.set('hub.theme', t); }
+setTheme(store.get('hub.theme', matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+const flip = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+$('#theme').onclick = flip;
+$('#rand').onclick = () => { const m = SIMS[Math.floor(Math.random() * SIMS.length)]; window.open(m.live, '_blank', 'noopener'); };
+addEventListener('keydown', e => { if (e.ctrlKey || e.metaKey || e.altKey) return; const typing = /input|textarea/i.test(document.activeElement.tagName); if (e.key === 'Escape') { $('#q').value = ''; $('#q').blur(); apply(); return; } if (typing) return; if (e.key === '/') { e.preventDefault(); $('#sims').scrollIntoView(); $('#q').focus(); } else if (e.key.toLowerCase() === 't') flip(); });
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) $$('.links a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+['path', 'sims', 'glossary', 'quiz'].forEach(id => io.observe(document.getElementById(id)));
+
+/* background */
+(function () {
+  const cv = $('#bg'), cx = cv.getContext('2d'); let W, H, P = [], m = { x: -999, y: -999 };
+  if (matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  function size() { W = cv.width = innerWidth; H = cv.height = innerHeight; P = Array.from({ length: Math.min(70, Math.floor(W * H / 22000)) }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35 })); }
+  addEventListener('resize', size); addEventListener('pointermove', e => { m.x = e.clientX; m.y = e.clientY; }); size();
+  (function loop() {
+    cx.clearRect(0, 0, W, H); const col = document.documentElement.dataset.theme === 'light' ? '23,105,224' : '77,163,255';
+    P.forEach(p => { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1; cx.fillStyle = 'rgba(' + col + ',.7)'; cx.beginPath(); cx.arc(p.x, p.y, 1.6, 0, 6.3); cx.fill(); });
+    for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++) { const d = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y); if (d < 130) { cx.strokeStyle = 'rgba(' + col + ',' + (0.2 * (1 - d / 130)) + ')'; cx.beginPath(); cx.moveTo(P[i].x, P[i].y); cx.lineTo(P[j].x, P[j].y); cx.stroke(); } }
+    P.forEach(p => { const d = Math.hypot(p.x - m.x, p.y - m.y); if (d < 160) { cx.strokeStyle = 'rgba(' + col + ',' + (0.4 * (1 - d / 160)) + ')'; cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(m.x, m.y); cx.stroke(); } });
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
