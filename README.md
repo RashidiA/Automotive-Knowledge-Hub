@@ -17,7 +17,7 @@ Connect mathematics, engineering principles and real automotive practice in one 
 | Section | What it does |
 |---|---|
 | **Journey of a car** | Four stages (Design, Build, Quality, People and safety). Click a stage to filter the simulators that belong to it. |
-| **Simulators** | Six cards with a short description, what you will learn, tags, a **Launch** button for the live app and a link to the source code. Search and stage filters included. |
+| **Simulators** | Seven cards with a short description, what you will learn, tags, a **Launch** button for the live app and a link to the source code. Search and stage filters included. |
 | **Key terms** | 12 flip cards explaining terms such as body-in-white, Ackermann steering, weld lobe, Cpk, poka-yoke, REBA and Lifting Index. |
 | **Quick quiz** | Five questions based on the simulators, with instant feedback and a saved best score. |
 | **Extras** | Dark and light themes, keyboard shortcuts, animated background, mobile-friendly layout. |
@@ -30,12 +30,13 @@ Connect mathematics, engineering principles and real automotive practice in one 
 
 | Simulator | Stage | Focus | Live app | Source |
 |---|---|---|---|---|
-| **Automotive Simulations (student version)** | Design | Dashboard with Car Anatomy Lab (3D car, six systems, guided tour in English and Malay), spot welding, welding maths, car plant process, laser seam tracking and torque monitoring | [Open](https://rashidia.github.io/Automotive-simulation-student-version/) | [GitHub](https://github.com/RashidiA/Automotive-simulation-student-version) |
+| **Automotive Simulations (student version)** | Design | Dashboard with Car Anatomy Lab (3D car, six systems, guided tour in English and Malay), spot welding, welding maths, car plant process, laser seam tracking, ADAS simulator (levels 0 to 5) and torque monitoring | [Open](https://rashidia.github.io/Automotive-simulation-student-version/) | [GitHub](https://github.com/RashidiA/Automotive-simulation-student-version) |
 | **AR Gesture CAD Studio** | Design | Gesture-controlled 3D CAD with webcam hand tracking, STL import, extrusion and Boolean operations | [Open](https://ar-gesture-cad-studio-yovhcowlmh6mesydbs7wtj.streamlit.app/) | [GitHub](https://github.com/RashidiA/AR-Gesture-CAD-Studio) |
 | **Industrial Robot Cloud Simulator** | Build | Offline robot programming for spot welding and material handling, inverse kinematics, gesture teach pendant | [Open](https://industrial-robot-cloud-simulator-54jggbftztagnuxosqtvzr.streamlit.app/) | [GitHub](https://github.com/RashidiA/Industrial-Robot-Cloud-Simulator) |
 | **Spot Weld Process Simulator** | Build | Weld lobe mapping for multi-layer sheet steel, nugget growth and expulsion limits | [Open](https://spot-weld-process-simulator-jogq55brt4wsqfy8sgonbp.streamlit.app/) | [GitHub](https://github.com/RashidiA/Spot-Weld-Process-Simulator) |
 | **Process Capability Study** | Quality | Cp, Cpk, PPM, control chart, histogram and PDF audit report | [Open](https://process-capability-study-apjprzx7rkxtwwerctdqz3.streamlit.app/) | [GitHub](https://github.com/RashidiA/Process-Capability-Study) |
 | **Ergonomic Risk Evaluation (REBA)** | People and safety | Webcam posture scoring with REBA, NIOSH lifting analysis and PDF report | [Open](https://ergonomic-risk-evaluation-reba-xugjcmzcuciyhtkz3adgbk.streamlit.app/) | [GitHub](https://github.com/RashidiA/Ergonomic-Risk-Evaluation-REBA) |
+| **Smartphone ADAS Pro** | People and safety | Phone-camera driver-assistance demo: detects vehicles, pedestrians, animals, road signs and traffic lights, shows the lane in blue and warns on lane drift | [Open](https://smartphone-adaspro-app-2uumyn58jvniwsku8uspgu.streamlit.app/) | [GitHub](https://github.com/RashidiA/Smartphone-ADASPro-App) |
 
 > 💡 **Good to know**
 > * Free Streamlit apps go to sleep when nobody uses them. If a page says it is waking up, wait about 30 seconds.
