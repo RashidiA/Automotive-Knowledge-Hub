@@ -17,12 +17,13 @@ Connect mathematics, engineering principles and real automotive practice in one 
 | Section | What it does |
 |---|---|
 | **Journey of a car** | Four stages (Design, Build, Quality, People and safety). Click a stage to filter the simulators that belong to it. |
-| **Simulators** | Seven cards with a short description, what you will learn, tags, a **Launch** button for the live app and a link to the source code. Search and stage filters included. |
+| **Simulators** | Eight cards with a short description, what you will learn, tags, a **Launch** button for the live app and a link to the source code. Search and stage filters included. |
 | **Key terms** | 12 flip cards explaining terms such as body-in-white, Ackermann steering, weld lobe, Cpk, poka-yoke, REBA and Lifting Index. |
 | **Quick quiz** | Five questions based on the simulators, with instant feedback and a saved best score. |
+| **Two languages** | Switch between **English and Bahasa Malaysia** with the EN / BM button. Everything is translated: menus, simulator cards, key terms and the quiz. Your choice is saved in the browser, and the first visit follows your device language. |
 | **Extras** | Dark and light themes, keyboard shortcuts, animated background, mobile-friendly layout. |
 
-**Keyboard shortcuts:** `/` search · `T` switch theme · `Esc` clear search
+**Keyboard shortcuts:** `/` search · `T` switch theme · `L` switch language · `Esc` clear search
 
 ---
 
@@ -37,9 +38,11 @@ Connect mathematics, engineering principles and real automotive practice in one 
 | **Process Capability Study** | Quality | Cp, Cpk, PPM, control chart, histogram and PDF audit report | [Open](https://process-capability-study-apjprzx7rkxtwwerctdqz3.streamlit.app/) | [GitHub](https://github.com/RashidiA/Process-Capability-Study) |
 | **Ergonomic Risk Evaluation (REBA)** | People and safety | Webcam posture scoring with REBA, NIOSH lifting analysis and PDF report | [Open](https://ergonomic-risk-evaluation-reba-xugjcmzcuciyhtkz3adgbk.streamlit.app/) | [GitHub](https://github.com/RashidiA/Ergonomic-Risk-Evaluation-REBA) |
 | **Smartphone ADAS Pro** | People and safety | Phone-camera driver-assistance demo: detects vehicles, pedestrians, animals, road signs and traffic lights, shows the lane in blue and warns on lane drift | [Open](https://smartphone-adaspro-app-2uumyn58jvniwsku8uspgu.streamlit.app/) | [GitHub](https://github.com/RashidiA/Smartphone-ADASPro-App) |
+| **ADAS Pro + Navigation** 🆕 | People and safety | Standalone phone version of ADAS Pro with GPS speed, map speed limit, destination search, turn-by-turn voice (English or Bahasa Melayu), mini-map, lane hints and a mirrored windscreen HUD | [Open](https://rashidia.github.io/ADAS-Pro-Nav-App/) | [GitHub](https://github.com/RashidiA/ADAS-Pro-Nav-App) |
 
 > 💡 **Good to know**
 > * Free Streamlit apps go to sleep when nobody uses them. If a page says it is waking up, wait about 30 seconds.
+> * **ADAS Pro + Navigation** also asks for your location (GPS). Set it up before driving and never use a phone app while the vehicle is moving.
 > * Apps marked **Webcam** ask for camera permission and work best on a laptop or desktop in good light. Video is processed for the simulation; check each app's repository for details.
 
 ---
@@ -59,10 +62,11 @@ Everything is edited at the top of the `<script>` section in `index.html`:
 
 | List | Use it to |
 |---|---|
-| `SIMS` | Add, remove or reword simulators (title, stage, colour, description, three learning points, tags, live link, repository link, icon). |
-| `STAGES` | Rename or add journey stages. A simulator's `stage` must match a stage `id`. |
-| `TERMS` | Add or edit key-term flip cards (`['Term', 'Meaning']`). |
-| `QUIZ` | Add questions (`q` question, `o` options, `a` index of the correct option starting at 0, `w` explanation). |
+| `SIMS` | Add, remove or reword simulators (title, stage, colour, description, three learning points, tags, live link, repository link, icon). Descriptions and learning points have an English `en` and a Bahasa Malaysia `bm` version. |
+| `STAGES` | Rename or add journey stages (`t` = name, `x` = description, each with `en` and `bm`). A simulator's `stage` must match a stage `id`. |
+| `TERMS` | Add or edit key-term flip cards (`t` = term, `d` = meaning, each with `en` and `bm`). |
+| `QUIZ` | Add questions (`q` question, `o` options, `w` explanation, each with `en` and `bm`; `a` is the index of the correct option starting at 0). |
+| `UI` | Edit the page texts, buttons and quiz messages in both languages. Tags are translated in `TAGS_BM`. |
 
 After editing, commit the change. GitHub Pages republishes the site within a minute or two.
 
