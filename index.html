@@ -104,8 +104,11 @@ h2.sec{font-size:clamp(22px,3.4vw,32px);margin:0 0 6px}
 footer{border-top:1px solid var(--line);margin-top:30px;padding:26px 0 40px;text-align:center;color:var(--dim);font-size:13px}
 footer a{color:var(--a)}
 kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font-size:11px;background:var(--card)}
+#lang{display:inline-flex;gap:0;padding:0;overflow:hidden}
+#lang b{padding:8px 10px;font-weight:700;font-size:12px;color:var(--dim);letter-spacing:.04em}
+#lang b.on{background:var(--a);color:#fff}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding-top:44px}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding-top:44px}.logo{font-size:12px;line-height:1.15}nav .wrap{gap:8px}.links{gap:2px}.links .btn{padding:7px 9px}#lang b{padding:7px 8px}}
 </style>
 </head>
 <body>
@@ -114,181 +117,267 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;paddi
 <nav><div class="wrap">
   <a class="logo" href="#top"><i><svg viewBox="0 0 24 24"><path d="M3 15l1.5-5A2 2 0 0 1 6.4 8.5h11.2a2 2 0 0 1 1.9 1.5L21 15v3H3z"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/></svg></i>Automotive Knowledge Hub</a>
   <div class="links">
-    <a href="#path">Learning path</a><a href="#sims" class="keep">Simulators</a><a href="#glossary">Glossary</a><a href="#quiz">Quiz</a>
-    <button class="btn" id="theme" aria-label="Toggle light or dark theme">Theme</button>
+    <a href="#path" data-i="navPath">Learning path</a><a href="#sims" class="keep" data-i="navSims">Simulators</a><a href="#glossary" data-i="navGl">Glossary</a><a href="#quiz" data-i="navQuiz">Quiz</a>
+    <button class="btn" id="lang" data-ia="langAria" aria-label="Change language" title="English / Bahasa Malaysia"><b data-l="en">EN</b><b data-l="bm">BM</b></button>
+    <button class="btn" id="theme" data-ia="themeAria" data-i="theme" aria-label="Toggle light or dark theme">Theme</button>
   </div>
 </div></nav>
 
 <header class="wrap hero" id="top">
-  <span class="pill">Learn · Simulate · Build</span>
-  <h1>Learn automotive engineering by <span class="grad">trying it</span></h1>
-  <p>A free hub for students and young engineers. Explore how a car is built, welded, programmed, checked for quality and made safe for workers, using real, hands-on simulators that run in your browser.</p>
-  <div class="cta"><a class="btn pri" href="#sims">Start exploring</a><a class="btn" href="#quiz">Test yourself</a><button class="btn" id="rand">Surprise me</button></div>
+  <span class="pill" data-i="pill">Learn · Simulate · Build</span>
+  <h1 data-ih="h1">Learn automotive engineering by <span class="grad">trying it</span></h1>
+  <p data-i="heroP">A free hub for students and young engineers. Explore how a car is built, welded, programmed, checked for quality and made safe for workers, using real, hands-on simulators that run in your browser.</p>
+  <div class="cta"><a class="btn pri" href="#sims" data-i="cta1">Start exploring</a><a class="btn" href="#quiz" data-i="cta2">Test yourself</a><button class="btn" id="rand" data-i="cta3">Surprise me</button></div>
   <div class="stats">
-    <div class="stat"><b id="n1">0</b><span>Simulators</span></div>
-    <div class="stat"><b id="n2">0</b><span>Topics</span></div>
-    <div class="stat"><b id="n3">0</b><span>Key terms</span></div>
+    <div class="stat"><b id="n1">0</b><span data-i="statSim">Simulators</span></div>
+    <div class="stat"><b id="n2">0</b><span data-i="statTop">Topics</span></div>
+    <div class="stat"><b id="n3">0</b><span data-i="statTerm">Key terms</span></div>
   </div>
 </header>
 
 <main class="wrap">
   <section id="path">
-    <h2 class="sec">Follow the journey of a car</h2>
-    <p class="sub">Pick a stage to see which simulators belong to it.</p>
+    <h2 class="sec" data-i="pathH">Follow the journey of a car</h2>
+    <p class="sub" data-i="pathSub">Pick a stage to see which simulators belong to it.</p>
     <div class="path" id="steps"></div>
   </section>
 
   <section id="sims">
-    <h2 class="sec">Simulators</h2>
-    <p class="sub">Each one opens a live app. Source code for every project is open on GitHub, so you can read it, copy it and learn from it.</p>
+    <h2 class="sec" data-i="simsH">Simulators</h2>
+    <p class="sub" data-i="simsSub">Each one opens a live app. Source code for every project is open on GitHub, so you can read it, copy it and learn from it.</p>
     <div class="bar">
-      <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="Search simulators (press / )" aria-label="Search simulators" autocomplete="off"></div>
-      <div class="chips" id="chips" role="group" aria-label="Filter by stage"></div>
+      <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="q" type="search" placeholder="Search simulators (press / )" aria-label="Search simulators" data-ip="searchPh" data-ia="searchAria" autocomplete="off"></div>
+      <div class="chips" id="chips" role="group" aria-label="Filter by stage" data-ia="chipsAria"></div>
     </div>
     <div class="grid" id="grid"></div>
-    <div class="empty" id="empty">No simulator matches your search.</div>
-    <p class="note" style="margin-top:16px">Tip: free cloud apps go to sleep when nobody uses them. If a page says it is waking up, wait about 30 seconds and it will start. Apps marked "Webcam" ask for camera permission and work best on a laptop or desktop in good light.</p>
+    <div class="empty" id="empty" data-i="empty">No simulator matches your search.</div>
+    <p class="note" style="margin-top:16px" data-i="note">Tip: free cloud apps go to sleep when nobody uses them. If a page says it is waking up, wait about 30 seconds and it will start. Apps marked "Webcam" ask for camera permission and work best on a laptop or desktop in good light.</p>
   </section>
 
   <section id="glossary">
-    <h2 class="sec">Key terms</h2>
-    <p class="sub">Tap a card to flip it.</p>
+    <h2 class="sec" data-i="glH">Key terms</h2>
+    <p class="sub" data-i="glSub">Tap a card to flip it.</p>
     <div class="gl" id="gl"></div>
   </section>
 
   <section id="quiz">
-    <h2 class="sec">Quick quiz</h2>
-    <p class="sub">Five questions from the simulators above.</p>
+    <h2 class="sec" data-i="quizH">Quick quiz</h2>
+    <p class="sub" data-i="quizSub">Five questions from the simulators above.</p>
     <div class="quiz" id="qz"></div>
   </section>
 
   <section id="about">
-    <h2 class="sec">About this hub</h2>
+    <h2 class="sec" data-i="aboutH">About this hub</h2>
     <div class="about">
-      <div><b>Built for learning</b><span>Simulators are simplified so you can see the ideas clearly. They are for teaching, not for real design or safety decisions.</span></div>
-      <div><b>Open source</b><span>Every project has its code on GitHub. Fork it, study it, improve it.</span></div>
-      <div><b>Grow the hub</b><span>New simulators are added as they are built. Students are welcome to suggest topics.</span></div>
+      <div><b data-i="ab1h">Built for learning</b><span data-i="ab1">Simulators are simplified so you can see the ideas clearly. They are for teaching, not for real design or safety decisions.</span></div>
+      <div><b data-i="ab2h">Open source</b><span data-i="ab2">Every project has its code on GitHub. Fork it, study it, improve it.</span></div>
+      <div><b data-i="ab3h">Grow the hub</b><span data-i="ab3">New simulators are added as they are built. Students are welcome to suggest topics.</span></div>
     </div>
   </section>
 </main>
 
-<footer><div class="wrap">Automotive Knowledge Hub · <a href="https://github.com/RashidiA" target="_blank" rel="noopener">GitHub: RashidiA</a><br>Shortcuts: <kbd>/</kbd> search · <kbd>T</kbd> theme</div></footer>
+<footer><div class="wrap">Automotive Knowledge Hub · <a href="https://github.com/RashidiA" target="_blank" rel="noopener">GitHub: RashidiA</a><br><span data-ih="foot">Shortcuts: <kbd>/</kbd> search · <kbd>T</kbd> theme · <kbd>L</kbd> language</span></div></footer>
 
 <script>
-/* ===== EDIT HERE: stages, simulators, terms and quiz ===== */
+/* ===== EDIT HERE: texts, stages, simulators, terms and quiz (each has English "en" and Bahasa Malaysia "bm") ===== */
+const UI = {
+  en: {
+    title: 'Automotive Knowledge Hub', metaDesc: 'Learn automotive engineering and try real simulators: car anatomy, welding, robots, CAD, ergonomics, quality and ADAS.',
+    navPath: 'Learning path', navSims: 'Simulators', navGl: 'Glossary', navQuiz: 'Quiz', theme: 'Theme', themeAria: 'Toggle light or dark theme', langAria: 'Change language',
+    pill: 'Learn · Simulate · Build', h1: 'Learn automotive engineering by <span class="grad">trying it</span>',
+    heroP: 'A free hub for students and young engineers. Explore how a car is built, welded, programmed, checked for quality and made safe for workers, using real, hands-on simulators that run in your browser.',
+    cta1: 'Start exploring', cta2: 'Test yourself', cta3: 'Surprise me', statSim: 'Simulators', statTop: 'Topics', statTerm: 'Key terms',
+    pathH: 'Follow the journey of a car', pathSub: 'Pick a stage to see which simulators belong to it.',
+    simsH: 'Simulators', simsSub: 'Each one opens a live app. Source code for every project is open on GitHub, so you can read it, copy it and learn from it.',
+    searchPh: 'Search simulators (press / )', searchAria: 'Search simulators', chipsAria: 'Filter by stage', all: 'All', empty: 'No simulator matches your search.',
+    note: 'Tip: free cloud apps go to sleep when nobody uses them. If a page says it is waking up, wait about 30 seconds and it will start. Apps marked "Webcam" ask for camera permission and work best on a laptop or desktop in good light. ADAS Pro Nav also asks for your location (GPS). Never use a phone app while driving: set it up before you drive.',
+    glH: 'Key terms', glSub: 'Tap a card to flip it.', flipFront: 'Tap to see the meaning',
+    quizH: 'Quick quiz', quizSub: 'Five questions from the simulators above.',
+    aboutH: 'About this hub',
+    ab1h: 'Built for learning', ab1: 'Simulators are simplified so you can see the ideas clearly. They are for teaching, not for real design or safety decisions.',
+    ab2h: 'Open source', ab2: 'Every project has its code on GitHub. Fork it, study it, improve it.',
+    ab3h: 'Grow the hub', ab3: 'New simulators are added as they are built. Students are welcome to suggest topics.',
+    foot: 'Shortcuts: <kbd>/</kbd> search · <kbd>T</kbd> theme · <kbd>L</kbd> language',
+    launch: 'Launch ↗', code: 'Code on GitHub', qOf: (n, m) => 'Question ' + n + ' of ' + m, next: 'Next question', seeScore: 'See score', again: 'Try again', ok: 'Correct. ', no: 'Not quite. ',
+    s1: 'Perfect score. Well done!', s2: 'Good work. Try the simulators to fill the gaps.', s3: 'Keep going. Open a simulator and try again.', best: ' Best so far: '
+  },
+  bm: {
+    title: 'Hab Pengetahuan Automotif', metaDesc: 'Belajar kejuruteraan automotif dan cuba simulator sebenar: anatomi kereta, kimpalan, robot, CAD, ergonomik, kualiti dan ADAS.',
+    navPath: 'Laluan pembelajaran', navSims: 'Simulator', navGl: 'Glosari', navQuiz: 'Kuiz', theme: 'Tema', themeAria: 'Tukar tema cerah atau gelap', langAria: 'Tukar bahasa',
+    pill: 'Belajar · Simulasi · Bina', h1: 'Belajar kejuruteraan automotif dengan <span class="grad">mencubanya</span>',
+    heroP: 'Hab percuma untuk pelajar dan jurutera muda. Terokai bagaimana kereta dibina, dikimpal, diprogram, disemak kualitinya dan dibuat selamat untuk pekerja, menggunakan simulator sebenar yang interaktif dan berjalan dalam pelayar anda.',
+    cta1: 'Mula meneroka', cta2: 'Uji diri anda', cta3: 'Kejutkan saya', statSim: 'Simulator', statTop: 'Topik', statTerm: 'Istilah utama',
+    pathH: 'Ikuti perjalanan sebuah kereta', pathSub: 'Pilih satu peringkat untuk melihat simulator yang berkaitan.',
+    simsH: 'Simulator', simsSub: 'Setiap satu membuka aplikasi hidup. Kod sumber setiap projek terbuka di GitHub, jadi anda boleh membacanya, menyalinnya dan belajar daripadanya.',
+    searchPh: 'Cari simulator (tekan / )', searchAria: 'Cari simulator', chipsAria: 'Tapis mengikut peringkat', all: 'Semua', empty: 'Tiada simulator yang sepadan dengan carian anda.',
+    note: 'Petua: aplikasi awan percuma akan tidur apabila tiada pengguna. Jika halaman memaklumkan ia sedang bangun, tunggu kira-kira 30 saat dan ia akan bermula. Aplikasi bertanda "Kamera web" meminta kebenaran kamera dan paling sesuai pada komputer riba atau desktop dengan cahaya yang baik. ADAS Pro Nav juga meminta lokasi anda (GPS). Jangan sekali-kali menggunakan aplikasi telefon semasa memandu: sediakannya sebelum anda memandu.',
+    glH: 'Istilah utama', glSub: 'Ketik kad untuk memusingkannya.', flipFront: 'Ketik untuk melihat maksud',
+    quizH: 'Kuiz pantas', quizSub: 'Lima soalan daripada simulator di atas.',
+    aboutH: 'Tentang hab ini',
+    ab1h: 'Dibina untuk pembelajaran', ab1: 'Simulator dipermudahkan supaya anda dapat melihat idea dengan jelas. Ia untuk pengajaran, bukan untuk reka bentuk atau keputusan keselamatan sebenar.',
+    ab2h: 'Sumber terbuka', ab2: 'Setiap projek mempunyai kodnya di GitHub. Salin (fork), kaji dan baikinya.',
+    ab3h: 'Hab yang berkembang', ab3: 'Simulator baharu ditambah apabila siap dibina. Pelajar dialu-alukan mencadangkan topik.',
+    foot: 'Pintasan: <kbd>/</kbd> cari · <kbd>T</kbd> tema · <kbd>L</kbd> bahasa',
+    launch: 'Lancar ↗', code: 'Kod di GitHub', qOf: (n, m) => 'Soalan ' + n + ' daripada ' + m, next: 'Soalan seterusnya', seeScore: 'Lihat skor', again: 'Cuba lagi', ok: 'Betul. ', no: 'Belum tepat. ',
+    s1: 'Skor sempurna. Syabas!', s2: 'Kerja yang baik. Cuba simulator untuk mengisi kekurangan.', s3: 'Teruskan usaha. Buka simulator dan cuba lagi.', best: ' Terbaik setakat ini: '
+  }
+};
+const TAGS_BM = { 'Beginner friendly': 'Mesra pemula', 'English / Malay tour': 'Lawatan Inggeris / Melayu', 'Webcam': 'Kamera web', 'Welding': 'Kimpalan', '3D plots': 'Plot 3D', 'Materials': 'Bahan', 'Statistics': 'Statistik', 'PDF report': 'Laporan PDF', 'Quality': 'Kualiti', 'Safety': 'Keselamatan', 'AI pose tracking': 'Penjejakan postur AI', 'Robotics': 'Robotik', 'AI detection': 'Pengesanan AI', 'Navigation': 'Navigasi' };
 const STAGES = [
-  { id: 'Design', title: 'Design', text: 'How a vehicle is shaped and modelled', color: '#4da3ff' },
-  { id: 'Build', title: 'Build', text: 'Robots, welding and the body shop', color: '#ff9f43' },
-  { id: 'Quality', title: 'Quality', text: 'Measure, control and improve', color: '#22d3a6' },
-  { id: 'People', title: 'People and safety', text: 'Protect the workers on the line', color: '#a78bfa' }
+  { id: 'Design', color: '#4da3ff', t: { en: 'Design', bm: 'Reka bentuk' }, x: { en: 'How a vehicle is shaped and modelled', bm: 'Bagaimana kenderaan dibentuk dan dimodelkan' } },
+  { id: 'Build', color: '#ff9f43', t: { en: 'Build', bm: 'Bina' }, x: { en: 'Robots, welding and the body shop', bm: 'Robot, kimpalan dan bengkel badan' } },
+  { id: 'Quality', color: '#22d3a6', t: { en: 'Quality', bm: 'Kualiti' }, x: { en: 'Measure, control and improve', bm: 'Ukur, kawal dan baiki' } },
+  { id: 'People', color: '#a78bfa', t: { en: 'People and safety', bm: 'Manusia dan keselamatan' }, x: { en: 'Protect the workers on the line', bm: 'Lindungi pekerja di talian' } }
 ];
 const SIMS = [
-  { title: 'Automotive Simulations (student version)', stage: 'Design', color: '#4da3ff', badge: 'Start here',
-    desc: 'A set of simulators in one dashboard, including the 3D Car Anatomy Lab, spot welding, welding maths, car plant process, laser seam tracking, ADAS system and torque monitoring.',
-    learn: ['How the six systems of a car work', 'Welding physics and adaptive control', 'Plant flow, vision tracking, ADAS system and torque quality'],
+  { title: 'Automotive Simulations (student version)', stage: 'Design', color: '#4da3ff', badge: { en: 'Start here', bm: 'Mula di sini' },
+    desc: { en: 'A set of simulators in one dashboard, including the 3D Car Anatomy Lab, spot welding, welding maths, car plant process, laser seam tracking, ADAS system and torque monitoring.', bm: 'Satu set simulator dalam satu papan pemuka, termasuk Makmal Anatomi Kereta 3D, kimpalan tompok, matematik kimpalan, proses kilang kereta, penjejakan seam laser, sistem ADAS dan pemantauan tork.' },
+    learn: { en: ['How the six systems of a car work', 'Welding physics and adaptive control', 'Plant flow, vision tracking, ADAS system and torque quality'], bm: ['Bagaimana enam sistem kereta berfungsi', 'Fizik kimpalan dan kawalan adaptif', 'Aliran kilang, penjejakan visi, sistem ADAS dan kualiti tork'] },
     tags: ['3D', 'Beginner friendly', 'English / Malay tour'],
     live: 'https://rashidia.github.io/Automotive-simulation-student-version/', repo: 'https://github.com/RashidiA/Automotive-simulation-student-version',
     icon: '<path d="M3 15l1.5-5A2 2 0 0 1 6.4 8.5h11.2a2 2 0 0 1 1.9 1.5L21 15v3H3z"/><circle cx="7.5" cy="17.5" r="1.7"/><circle cx="16.5" cy="17.5" r="1.7"/>' },
   { title: 'AR Gesture CAD Studio', stage: 'Design', color: '#38bdf8',
-    desc: 'A gesture-controlled 3D CAD workspace. Use pinch gestures in front of your webcam to move solids, import STL models, extrude sketches and combine shapes.',
-    learn: ['3D modelling basics and Boolean operations', 'Importing and measuring STL parts', 'Hand tracking as a new way to design'],
+    desc: { en: 'A gesture-controlled 3D CAD workspace. Use pinch gestures in front of your webcam to move solids, import STL models, extrude sketches and combine shapes.', bm: 'Ruang kerja CAD 3D yang dikawal dengan gerak isyarat. Gunakan gerak isyarat cubit di hadapan kamera web anda untuk menggerakkan pepejal, mengimport model STL, mengekstrud lakaran dan menggabungkan bentuk.' },
+    learn: { en: ['3D modelling basics and Boolean operations', 'Importing and measuring STL parts', 'Hand tracking as a new way to design'], bm: ['Asas pemodelan 3D dan operasi Boolean', 'Mengimport dan mengukur bahagian STL', 'Penjejakan tangan sebagai cara baharu untuk mereka bentuk'] },
     tags: ['Webcam', 'CAD', 'Three.js'],
     live: 'https://ar-gesture-cad-studio-yovhcowlmh6mesydbs7wtj.streamlit.app/', repo: 'https://github.com/RashidiA/AR-Gesture-CAD-Studio',
     icon: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>' },
   { title: 'Industrial Robot Cloud Simulator', stage: 'Build', color: '#ff7a59',
-    desc: 'An offline programming simulator for industrial robots in automotive work such as spot welding and material handling. Move the arm in 3D and teach positions with hand gestures.',
-    learn: ['Robot kinematics and inverse kinematics', 'Setting up tools and fixtures', 'Teaching a robot program by gesture'],
+    desc: { en: 'An offline programming simulator for industrial robots in automotive work such as spot welding and material handling. Move the arm in 3D and teach positions with hand gestures.', bm: 'Simulator pengaturcaraan luar talian untuk robot industri dalam kerja automotif seperti kimpalan tompok dan pengendalian bahan. Gerakkan lengan dalam 3D dan ajar kedudukan dengan gerak isyarat tangan.' },
+    learn: { en: ['Robot kinematics and inverse kinematics', 'Setting up tools and fixtures', 'Teaching a robot program by gesture'], bm: ['Kinematik robot dan kinematik songsang', 'Menetapkan alat dan jig', 'Mengajar atur cara robot melalui gerak isyarat'] },
     tags: ['Webcam', 'Robotics', 'ABB / KUKA / Yaskawa'],
     live: 'https://industrial-robot-cloud-simulator-54jggbftztagnuxosqtvzr.streamlit.app/', repo: 'https://github.com/RashidiA/Industrial-Robot-Cloud-Simulator',
     icon: '<path d="M4 21h8"/><path d="M8 21v-6l5-5"/><path d="M13 10l4-6 3 2-3 5"/><circle cx="8" cy="15" r="1.6"/><circle cx="13" cy="10" r="1.6"/>' },
   { title: 'Spot Weld Process Simulator', stage: 'Build', color: '#ff9f43',
-    desc: 'Maps the weld lobe for resistance spot welding of multi-layer sheet steel. Change current, time and force to see nugget growth, expulsion limits and a heat animation.',
-    learn: ['What a weld lobe is and why it matters', 'How steel grade and zinc coating change welding', 'Reading 3D and 2D process windows'],
+    desc: { en: 'Maps the weld lobe for resistance spot welding of multi-layer sheet steel. Change current, time and force to see nugget growth, expulsion limits and a heat animation.', bm: 'Memetakan lobus kimpalan untuk kimpalan tompok rintangan keluli kepingan berbilang lapisan. Ubah arus, masa dan daya untuk melihat pertumbuhan nugget, had percikan (expulsion) dan animasi haba.' },
+    learn: { en: ['What a weld lobe is and why it matters', 'How steel grade and zinc coating change welding', 'Reading 3D and 2D process windows'], bm: ['Apa itu lobus kimpalan dan mengapa ia penting', 'Bagaimana gred keluli dan salutan zink mengubah kimpalan', 'Membaca tetingkap proses 3D dan 2D'] },
     tags: ['Welding', '3D plots', 'Materials'],
     live: 'https://spot-weld-process-simulator-jogq55brt4wsqfy8sgonbp.streamlit.app/', repo: 'https://github.com/RashidiA/Spot-Weld-Process-Simulator',
     icon: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>' },
   { title: 'Process Capability Study', stage: 'Quality', color: '#22d3a6',
-    desc: 'Enter measurements and get mean, standard deviation, Cp, Cpk and expected defects per million, with a control chart, a histogram and a PDF audit report.',
-    learn: ['Cp and Cpk, and what "capable" means', 'Control charts and histograms', 'Turning data into a quality report'],
+    desc: { en: 'Enter measurements and get mean, standard deviation, Cp, Cpk and expected defects per million, with a control chart, a histogram and a PDF audit report.', bm: 'Masukkan ukuran dan dapatkan min, sisihan piawai, Cp, Cpk dan jangkaan kecacatan sejuta (PPM), dengan carta kawalan, histogram dan laporan audit PDF.' },
+    learn: { en: ['Cp and Cpk, and what "capable" means', 'Control charts and histograms', 'Turning data into a quality report'], bm: ['Cp dan Cpk, dan maksud "berkeupayaan"', 'Carta kawalan dan histogram', 'Menukar data kepada laporan kualiti'] },
     tags: ['Statistics', 'PDF report', 'Quality'],
     live: 'https://process-capability-study-apjprzx7rkxtwwerctdqz3.streamlit.app/', repo: 'https://github.com/RashidiA/Process-Capability-Study',
     icon: '<path d="M3 20h18"/><path d="M5 20V12M10 20V6M15 20v-9M20 20V9"/>' },
   { title: 'Ergonomic Risk Evaluation (REBA)', stage: 'People', color: '#a78bfa',
-    desc: 'Uses your webcam to track body posture, scores it with the REBA method and checks lifting with the NIOSH equation. Exports a PDF audit report.',
-    learn: ['How REBA scores trunk, neck, arms and legs', 'Recommended weight limit and lifting index', 'Spotting risky postures on a line'],
+    desc: { en: 'Uses your webcam to track body posture, scores it with the REBA method and checks lifting with the NIOSH equation. Exports a PDF audit report.', bm: 'Menggunakan kamera web anda untuk menjejak postur badan, menilainya dengan kaedah REBA dan menyemak pengangkatan dengan persamaan NIOSH. Mengeksport laporan audit PDF.' },
+    learn: { en: ['How REBA scores trunk, neck, arms and legs', 'Recommended weight limit and lifting index', 'Spotting risky postures on a line'], bm: ['Bagaimana REBA menilai badan, leher, lengan dan kaki', 'Had berat yang disyorkan dan indeks angkat', 'Mengesan postur berisiko pada talian'] },
     tags: ['Webcam', 'Safety', 'AI pose tracking'],
     live: 'https://ergonomic-risk-evaluation-reba-xugjcmzcuciyhtkz3adgbk.streamlit.app/', repo: 'https://github.com/RashidiA/Ergonomic-Risk-Evaluation-REBA',
     icon: '<circle cx="12" cy="5" r="2.2"/><path d="M12 8v6M12 14l-3 6M12 14l3 6M7 11l5-2 5 2"/>' },
-  { title: 'Smartphone ADAS Pro', stage: 'People', color: '#facc15', badge: 'New',
-    desc: 'Turns your phone camera into a driver-assistance demo. It detects vehicles, pedestrians, animals, road signs and traffic lights, marks the white lane in blue, and warns you when the car drifts out of its lane.',
-    learn: ['How a camera-based ADAS Level 2 system sees the road', 'Lane-departure and collision warnings', 'Why edge computing on the phone keeps it fast'],
+  { title: 'Smartphone ADAS Pro', stage: 'People', color: '#facc15',
+    desc: { en: 'Turns your phone camera into a driver-assistance demo. It detects vehicles, pedestrians, animals, road signs and traffic lights, marks the white lane in blue, and warns you when the car drifts out of its lane.', bm: 'Menjadikan kamera telefon anda demo bantuan pemandu. Ia mengesan kenderaan, pejalan kaki, haiwan, papan tanda jalan dan lampu isyarat, menandakan lorong putih dengan warna biru, dan memberi amaran apabila kereta terkeluar daripada lorong.' },
+    learn: { en: ['How a camera-based ADAS Level 2 system sees the road', 'Lane-departure and collision warnings', 'Why edge computing on the phone keeps it fast'], bm: ['Bagaimana sistem ADAS Tahap 2 berasaskan kamera melihat jalan', 'Amaran keluar lorong dan amaran perlanggaran', 'Mengapa pengkomputeran tepi (edge) pada telefon menjadikannya pantas'] },
     tags: ['Webcam', 'ADAS', 'AI detection'],
     live: 'https://smartphone-adaspro-app-2uumyn58jvniwsku8uspgu.streamlit.app/', repo: 'https://github.com/RashidiA/Smartphone-ADASPro-App',
-    icon: '<path d="M3 15l1.5-5A2 2 0 0 1 6.4 8.5h11.2a2 2 0 0 1 1.9 1.5L21 15v3H3z"/><path d="M12 3v2M7 4.5l1 1.5M17 4.5l-1 1.5"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/>' }
+    icon: '<path d="M3 15l1.5-5A2 2 0 0 1 6.4 8.5h11.2a2 2 0 0 1 1.9 1.5L21 15v3H3z"/><path d="M12 3v2M7 4.5l1 1.5M17 4.5l-1 1.5"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/>' },
+  { title: 'ADAS Pro + Navigation', stage: 'People', color: '#fb923c', badge: { en: 'New', bm: 'Baharu' },
+    desc: { en: 'The standalone version of ADAS Pro for your phone, now with navigation. It adds GPS speed, the map speed limit, destination search and turn-by-turn directions with voice (English or Bahasa Melayu), a mini-map, lane hints and a mirrored HUD for the windscreen.', bm: 'Versi kendiri ADAS Pro untuk telefon anda, kini dengan navigasi. Ia menambah kelajuan GPS, had laju daripada peta, carian destinasi dan arah demi arah dengan suara (Inggeris atau Bahasa Melayu), peta mini, panduan lorong dan HUD cermin untuk cermin depan kereta.' },
+    learn: { en: ['How GPS, maps and a camera work together in a driver-assist system', 'Speed limits, over-speed warnings and route guidance', 'How a head-up display (HUD) shows information to the driver'], bm: ['Bagaimana GPS, peta dan kamera berfungsi bersama dalam sistem bantuan pemandu', 'Had laju, amaran laju lampau dan panduan laluan', 'Bagaimana paparan atas kepala (HUD) menunjukkan maklumat kepada pemandu'] },
+    tags: ['Webcam', 'ADAS', 'Navigation', 'HUD'],
+    live: 'https://rashidia.github.io/ADAS-Pro-Nav-App/', repo: 'https://github.com/RashidiA/ADAS-Pro-Nav-App',
+    icon: '<path d="M3 15l1.5-5A2 2 0 0 1 6.4 8.5h11.2a2 2 0 0 1 1.9 1.5L21 15v3H3z"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/><path d="M12 2l3 4h-6z"/><path d="M12 6v2.5"/>' }
 ];
 const TERMS = [
-  ['Body-in-white', 'The welded steel shell of a car before paint, doors and trim.'],
-  ['Ackermann steering', 'The inner front wheel turns more than the outer one so both tyres roll cleanly through a corner.'],
-  ['Differential', 'Splits drive between two wheels so they can turn at different speeds in a bend.'],
-  ['Weld lobe', 'The window of current and time that makes a good spot weld: too low is weak, too high throws out molten metal.'],
-  ['Weld nugget', 'The small melted-and-frozen zone that joins the metal sheets in a spot weld.'],
-  ['Dynamic resistance', 'How the electrical resistance across a spot weld changes during welding. Controllers use it to adapt.'],
-  ['Inverse kinematics', 'Working out the robot joint angles needed to put the tool at a chosen point.'],
-  ['Tool centre point (TCP)', 'The working point of a robot tool, for example the tip of a weld gun.'],
-  ['Cp and Cpk', 'Measures of how well a process fits inside its limits. Cpk 1.33 or more is normally called capable.'],
-  ['Poka-yoke', 'Error-proofing: designing a step so a mistake is impossible or is caught at once.'],
-  ['REBA', 'Rapid Entire Body Assessment: a score for how risky a working posture is.'],
-  ['Lifting Index', 'Load divided by the recommended weight limit. Above 1 means the lift is risky.']
+  { t: { en: 'Body-in-white', bm: 'Body-in-white (badan putih)' }, d: { en: 'The welded steel shell of a car before paint, doors and trim.', bm: 'Rangka keluli berkimpal sebuah kereta sebelum dicat serta dipasang pintu dan hiasan dalaman.' } },
+  { t: { en: 'Ackermann steering', bm: 'Stereng Ackermann' }, d: { en: 'The inner front wheel turns more than the outer one so both tyres roll cleanly through a corner.', bm: 'Roda depan sebelah dalam berpusing lebih daripada roda luar supaya kedua-dua tayar bergolek dengan lancar ketika membelok.' } },
+  { t: { en: 'Differential', bm: 'Pembeza (differential)' }, d: { en: 'Splits drive between two wheels so they can turn at different speeds in a bend.', bm: 'Membahagikan kuasa pemacu antara dua roda supaya ia boleh berputar pada kelajuan berbeza semasa membelok.' } },
+  { t: { en: 'Weld lobe', bm: 'Lobus kimpalan (weld lobe)' }, d: { en: 'The window of current and time that makes a good spot weld: too low is weak, too high throws out molten metal.', bm: 'Julat arus dan masa yang menghasilkan kimpalan tompok yang baik: terlalu rendah lemah, terlalu tinggi memercikkan logam cair.' } },
+  { t: { en: 'Weld nugget', bm: 'Nugget kimpalan' }, d: { en: 'The small melted-and-frozen zone that joins the metal sheets in a spot weld.', bm: 'Zon kecil yang mencair kemudian membeku yang menyambung kepingan logam dalam kimpalan tompok.' } },
+  { t: { en: 'Dynamic resistance', bm: 'Rintangan dinamik' }, d: { en: 'How the electrical resistance across a spot weld changes during welding. Controllers use it to adapt.', bm: 'Perubahan rintangan elektrik merentasi kimpalan tompok semasa mengimpal. Pengawal menggunakannya untuk menyesuaikan diri.' } },
+  { t: { en: 'Inverse kinematics', bm: 'Kinematik songsang' }, d: { en: 'Working out the robot joint angles needed to put the tool at a chosen point.', bm: 'Mengira sudut sendi robot yang diperlukan untuk meletakkan alat pada titik yang dipilih.' } },
+  { t: { en: 'Tool centre point (TCP)', bm: 'Titik pusat alat (TCP)' }, d: { en: 'The working point of a robot tool, for example the tip of a weld gun.', bm: 'Titik kerja alat robot, contohnya hujung gun kimpalan.' } },
+  { t: { en: 'Cp and Cpk', bm: 'Cp dan Cpk' }, d: { en: 'Measures of how well a process fits inside its limits. Cpk 1.33 or more is normally called capable.', bm: 'Ukuran sejauh mana sesuatu proses muat dalam had spesifikasinya. Cpk 1.33 atau lebih biasanya dipanggil berkeupayaan.' } },
+  { t: { en: 'Poka-yoke', bm: 'Poka-yoke' }, d: { en: 'Error-proofing: designing a step so a mistake is impossible or is caught at once.', bm: 'Pencegahan ralat: mereka bentuk sesuatu langkah supaya kesilapan mustahil berlaku atau dikesan serta-merta.' } },
+  { t: { en: 'REBA', bm: 'REBA' }, d: { en: 'Rapid Entire Body Assessment: a score for how risky a working posture is.', bm: 'Rapid Entire Body Assessment: skor untuk menilai tahap risiko sesuatu postur kerja.' } },
+  { t: { en: 'Lifting Index', bm: 'Indeks Angkat (Lifting Index)' }, d: { en: 'Load divided by the recommended weight limit. Above 1 means the lift is risky.', bm: 'Beban dibahagi dengan had berat yang disyorkan. Melebihi 1 bermakna angkatan itu berisiko.' } }
 ];
 const QUIZ = [
-  { q: 'A process has Cpk = 0.8. What does that mean?', o: ['It is capable and safe to run', 'It is not capable: too many parts will fall outside the limits', 'The process is perfectly centred', 'The sample is too small'], a: 1, w: 'Cpk below 1.00 is not capable. 1.33 or more is normally the target.' },
-  { q: 'What is the purpose of a weld lobe?', o: ['It shows the best robot speed', 'It marks the settings that give a good weld without expulsion', 'It measures paint thickness', 'It lists the steel grades'], a: 1, w: 'The lobe is the operating window of current and time (and force) that makes a good nugget.' },
-  { q: 'In Ackermann steering, which front wheel turns more in a corner?', o: ['The outer wheel', 'The inner wheel', 'Both turn the same', 'Neither: the rear wheels do'], a: 1, w: 'The inner wheel follows a tighter circle, so it must turn through a larger angle.' },
-  { q: 'What does a Lifting Index above 1 tell you?', o: ['The lift is within the safe limit', 'The load is lighter than needed', 'The lift is risky and should be redesigned', 'The worker is tall'], a: 2, w: 'Lifting Index = load / recommended weight limit. Above 1 means higher risk.' },
-  { q: 'What does inverse kinematics do for a robot?', o: ['Finds the joint angles that place the tool at a target', 'Measures the weld current', 'Counts parts on a line', 'Draws the CAD model'], a: 0, w: 'It works backwards from the wanted tool position to the joint angles.' }
+  { q: { en: 'A process has Cpk = 0.8. What does that mean?', bm: 'Satu proses mempunyai Cpk = 0.8. Apakah maksudnya?' },
+    o: { en: ['It is capable and safe to run', 'It is not capable: too many parts will fall outside the limits', 'The process is perfectly centred', 'The sample is too small'], bm: ['Ia berkeupayaan dan selamat dijalankan', 'Ia tidak berkeupayaan: terlalu banyak bahagian akan terkeluar daripada had', 'Proses itu berada tepat di tengah', 'Saiz sampel terlalu kecil'] }, a: 1,
+    w: { en: 'Cpk below 1.00 is not capable. 1.33 or more is normally the target.', bm: 'Cpk di bawah 1.00 bermakna tidak berkeupayaan. 1.33 atau lebih biasanya menjadi sasaran.' } },
+  { q: { en: 'What is the purpose of a weld lobe?', bm: 'Apakah tujuan lobus kimpalan (weld lobe)?' },
+    o: { en: ['It shows the best robot speed', 'It marks the settings that give a good weld without expulsion', 'It measures paint thickness', 'It lists the steel grades'], bm: ['Ia menunjukkan kelajuan robot terbaik', 'Ia menandakan tetapan yang menghasilkan kimpalan baik tanpa percikan (expulsion)', 'Ia mengukur ketebalan cat', 'Ia menyenaraikan gred keluli'] }, a: 1,
+    w: { en: 'The lobe is the operating window of current and time (and force) that makes a good nugget.', bm: 'Lobus ialah julat operasi arus dan masa (serta daya) yang menghasilkan nugget yang baik.' } },
+  { q: { en: 'In Ackermann steering, which front wheel turns more in a corner?', bm: 'Dalam stereng Ackermann, roda depan yang manakah berpusing lebih ketika membelok?' },
+    o: { en: ['The outer wheel', 'The inner wheel', 'Both turn the same', 'Neither: the rear wheels do'], bm: ['Roda luar', 'Roda dalam', 'Kedua-duanya sama', 'Tiada: roda belakang yang berpusing'] }, a: 1,
+    w: { en: 'The inner wheel follows a tighter circle, so it must turn through a larger angle.', bm: 'Roda dalam mengikut bulatan yang lebih ketat, jadi ia perlu berpusing pada sudut yang lebih besar.' } },
+  { q: { en: 'What does a Lifting Index above 1 tell you?', bm: 'Apakah maksud Indeks Angkat (Lifting Index) yang melebihi 1?' },
+    o: { en: ['The lift is within the safe limit', 'The load is lighter than needed', 'The lift is risky and should be redesigned', 'The worker is tall'], bm: ['Angkatan berada dalam had selamat', 'Beban lebih ringan daripada yang diperlukan', 'Angkatan berisiko dan perlu direka bentuk semula', 'Pekerja itu tinggi'] }, a: 2,
+    w: { en: 'Lifting Index = load / recommended weight limit. Above 1 means higher risk.', bm: 'Indeks Angkat = beban / had berat yang disyorkan. Melebihi 1 bermakna risiko lebih tinggi.' } },
+  { q: { en: 'What does inverse kinematics do for a robot?', bm: 'Apakah fungsi kinematik songsang untuk robot?' },
+    o: { en: ['Finds the joint angles that place the tool at a target', 'Measures the weld current', 'Counts parts on a line', 'Draws the CAD model'], bm: ['Mencari sudut sendi yang meletakkan alat pada sasaran', 'Mengukur arus kimpalan', 'Mengira bahagian pada talian', 'Melukis model CAD'] }, a: 0,
+    w: { en: 'It works backwards from the wanted tool position to the joint angles.', bm: 'Ia mengira ke belakang daripada kedudukan alat yang dikehendaki kepada sudut sendi.' } }
 ];
 
 /* ===== code below needs no editing ===== */
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const store = { get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } } };
-let stage = 'All';
+let stage = 'All', lang = store.get('hub.lang', /^(ms|id)/i.test(navigator.language || '') ? 'bm' : 'en'), first = true;
+if (lang !== 'en' && lang !== 'bm') lang = 'en';
+const tr = k => UI[lang][k];
+const tagTxt = t => lang === 'bm' ? (TAGS_BM[t] || t) : t;
 
-/* stages */
-const steps = $('#steps');
-STAGES.forEach(s => { const b = document.createElement('button'); b.className = 'step'; b.style.setProperty('--sc', s.color); b.setAttribute('aria-pressed', 'false'); b.innerHTML = '<b>' + s.title + '</b><span>' + s.text + '</span>'; b.onclick = () => { setStage(stage === s.id ? 'All' : s.id); document.getElementById('sims').scrollIntoView({ behavior: 'smooth' }); }; steps.appendChild(b); });
-
-/* cards */
-const grid = $('#grid');
-SIMS.forEach((m, i) => {
-  const c = document.createElement('article'); c.className = 'card'; c.style.setProperty('--c1', m.color); c.style.animationDelay = (i * 70) + 'ms'; c.dataset.stage = m.stage;
-  c.dataset.s = (m.title + ' ' + m.desc + ' ' + m.stage + ' ' + m.tags.join(' ') + ' ' + m.learn.join(' ')).toLowerCase();
-  c.innerHTML = (m.badge ? '<span class="badge">' + m.badge.toUpperCase() + '</span>' : '') +
-    '<div class="top"><div class="ic"><svg viewBox="0 0 24 24">' + m.icon + '</svg></div><div><div class="kind">' + m.stage + '</div><h3>' + m.title + '</h3></div></div>' +
-    '<p>' + m.desc + '</p><ul class="learn">' + m.learn.map(x => '<li>' + x + '</li>').join('') + '</ul>' +
-    '<div class="tags">' + m.tags.map(t => '<span class="tag' + (t === 'Webcam' ? ' cam' : '') + '">' + (t === 'Webcam' ? '📷 ' : '') + t + '</span>').join('') + '</div>' +
-    '<div class="acts"><a class="btn launch" href="' + m.live + '" target="_blank" rel="noopener">Launch ↗</a><a class="btn" href="' + m.repo + '" target="_blank" rel="noopener">Code on GitHub</a></div>';
-  c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%'); c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%'); });
-  grid.appendChild(c);
-});
-const chips = $('#chips');
-['All'].concat(STAGES.map(s => s.id)).forEach(id => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = id === 'People' ? 'People and safety' : id; b.dataset.id = id; b.setAttribute('aria-pressed', id === 'All'); b.onclick = () => setStage(id); chips.appendChild(b); });
+/* static text */
+function applyStatic() {
+  const U = UI[lang];
+  document.documentElement.lang = lang === 'bm' ? 'ms' : 'en'; document.title = U.title; $('meta[name=description]').setAttribute('content', U.metaDesc);
+  $$('[data-i]').forEach(el => { el.textContent = U[el.dataset.i]; });
+  $$('[data-ih]').forEach(el => { el.innerHTML = U[el.dataset.ih]; });
+  $$('[data-ip]').forEach(el => el.setAttribute('placeholder', U[el.dataset.ip]));
+  $$('[data-ia]').forEach(el => el.setAttribute('aria-label', U[el.dataset.ia]));
+  $$('#lang b').forEach(b => b.classList.toggle('on', b.dataset.l === lang));
+}
+/* stages + chips */
+function renderStages() {
+  const steps = $('#steps'); steps.innerHTML = '';
+  STAGES.forEach(s => { const b = document.createElement('button'); b.className = 'step'; b.style.setProperty('--sc', s.color); b.setAttribute('aria-pressed', stage === s.id); b.innerHTML = '<b>' + s.t[lang] + '</b><span>' + s.x[lang] + '</span>'; b.onclick = () => { setStage(stage === s.id ? 'All' : s.id); document.getElementById('sims').scrollIntoView({ behavior: 'smooth' }); }; steps.appendChild(b); });
+  const chips = $('#chips'); chips.innerHTML = '';
+  [{ id: 'All', t: { en: UI.en.all, bm: UI.bm.all } }].concat(STAGES).forEach(s => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = s.t[lang]; b.dataset.id = s.id; b.setAttribute('aria-pressed', s.id === stage); b.onclick = () => setStage(s.id); chips.appendChild(b); });
+}
 function setStage(id) { stage = id; $$('.chip').forEach(x => x.setAttribute('aria-pressed', x.dataset.id === id)); $$('.step').forEach((x, i) => x.setAttribute('aria-pressed', STAGES[i].id === id)); apply(); }
+/* cards */
+function renderCards() {
+  const grid = $('#grid'); grid.innerHTML = '';
+  SIMS.forEach((m, i) => {
+    const st = STAGES.find(s => s.id === m.stage), c = document.createElement('article'); c.className = 'card'; c.style.setProperty('--c1', m.color); c.dataset.stage = m.stage;
+    if (first) c.style.animationDelay = (i * 70) + 'ms'; else c.style.animation = 'none';
+    c.dataset.s = [m.title, m.desc.en, m.desc.bm, st.t.en, st.t.bm, m.tags.join(' '), m.tags.map(t => TAGS_BM[t] || t).join(' '), m.learn.en.join(' '), m.learn.bm.join(' ')].join(' ').toLowerCase();
+    c.innerHTML = (m.badge ? '<span class="badge">' + m.badge[lang].toUpperCase() + '</span>' : '') +
+      '<div class="top"><div class="ic"><svg viewBox="0 0 24 24">' + m.icon + '</svg></div><div><div class="kind">' + st.t[lang] + '</div><h3>' + m.title + '</h3></div></div>' +
+      '<p>' + m.desc[lang] + '</p><ul class="learn">' + m.learn[lang].map(x => '<li>' + x + '</li>').join('') + '</ul>' +
+      '<div class="tags">' + m.tags.map(t => '<span class="tag' + (t === 'Webcam' ? ' cam' : '') + '">' + (t === 'Webcam' ? '📷 ' : '') + tagTxt(t) + '</span>').join('') + '</div>' +
+      '<div class="acts"><a class="btn launch" href="' + m.live + '" target="_blank" rel="noopener">' + tr('launch') + '</a><a class="btn" href="' + m.repo + '" target="_blank" rel="noopener">' + tr('code') + '</a></div>';
+    c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%'); c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%'); });
+    grid.appendChild(c);
+  });
+  apply();
+}
 function apply() { const q = $('#q').value.trim().toLowerCase(); let n = 0; $$('.card').forEach(c => { const ok = (stage === 'All' || c.dataset.stage === stage) && (!q || c.dataset.s.includes(q)); c.classList.toggle('hide', !ok); if (ok) n++; }); $('#empty').style.display = n ? 'none' : 'block'; }
 $('#q').addEventListener('input', apply);
 
 /* glossary */
-$('#gl').innerHTML = TERMS.map(t => '<button class="flip" aria-pressed="false" aria-label="' + t[0] + '"><div><span><b>' + t[0] + '</b>Tap to see the meaning</span><span>' + t[1] + '<small>' + t[0] + '</small></span></div></button>').join('');
-$$('.flip').forEach(b => b.onclick = () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'));
-
-/* quiz */
-let qi = 0, sc = 0; const qz = $('#qz');
-function showQ() {
-  if (qi >= QUIZ.length) { const best = Math.max(store.get('hub.best', 0), sc); store.set('hub.best', best); qz.innerHTML = '<div class="qbar"><i style="width:100%"></i></div><div class="score">' + sc + ' / ' + QUIZ.length + '</div><p>' + (sc === QUIZ.length ? 'Perfect score. Well done!' : sc >= 3 ? 'Good work. Try the simulators to fill the gaps.' : 'Keep going. Open a simulator and try again.') + ' Best so far: ' + best + ' / ' + QUIZ.length + '.</p><button class="btn pri" id="again">Try again</button>'; $('#again').onclick = () => { qi = 0; sc = 0; showQ(); }; return; }
-  const k = QUIZ[qi]; qz.innerHTML = '<div class="qbar"><i style="width:' + (qi / QUIZ.length * 100) + '%"></i></div><small style="color:var(--dim)">Question ' + (qi + 1) + ' of ' + QUIZ.length + '</small><h4>' + k.q + '</h4>' + k.o.map((o, j) => '<button class="opt" data-j="' + j + '">' + o + '</button>').join('') + '<div class="why" aria-live="polite"></div><button class="btn pri" id="nx" hidden>' + (qi === QUIZ.length - 1 ? 'See score' : 'Next question') + '</button>';
-  $$('.opt').forEach(b => b.onclick = () => { const j = +b.dataset.j; if (j === k.a) sc++; $$('.opt').forEach(x => { x.disabled = true; if (+x.dataset.j === k.a) x.classList.add('ok'); }); if (j !== k.a) b.classList.add('no'); $('.why').textContent = (j === k.a ? 'Correct. ' : 'Not quite. ') + k.w; $('#nx').hidden = false; });
-  $('#nx').onclick = () => { qi++; showQ(); };
+function renderTerms() {
+  const open = $$('.flip').map(b => b.getAttribute('aria-pressed') === 'true');
+  $('#gl').innerHTML = TERMS.map(t => '<button class="flip" aria-pressed="false" aria-label="' + t.t[lang] + '"><div><span><b>' + t.t[lang] + '</b>' + tr('flipFront') + '</span><span>' + t.d[lang] + '<small>' + t.t[lang] + '</small></span></div></button>').join('');
+  $$('.flip').forEach((b, i) => { if (open[i]) b.setAttribute('aria-pressed', 'true'); b.onclick = () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); });
 }
-showQ();
+/* quiz */
+let qi = 0, sc = 0, answered = -1; const qz = $('#qz');
+function showQ() {
+  const U = UI[lang];
+  if (qi >= QUIZ.length) { const best = Math.max(store.get('hub.best', 0), sc); store.set('hub.best', best); qz.innerHTML = '<div class="qbar"><i style="width:100%"></i></div><div class="score">' + sc + ' / ' + QUIZ.length + '</div><p>' + (sc === QUIZ.length ? U.s1 : sc >= 3 ? U.s2 : U.s3) + U.best + best + ' / ' + QUIZ.length + '.</p><button class="btn pri" id="again">' + U.again + '</button>'; $('#again').onclick = () => { qi = 0; sc = 0; answered = -1; showQ(); }; return; }
+  const k = QUIZ[qi]; qz.innerHTML = '<div class="qbar"><i style="width:' + (qi / QUIZ.length * 100) + '%"></i></div><small style="color:var(--dim)">' + U.qOf(qi + 1, QUIZ.length) + '</small><h4>' + k.q[lang] + '</h4>' + k.o[lang].map((o, j) => '<button class="opt" data-j="' + j + '">' + o + '</button>').join('') + '<div class="why" aria-live="polite"></div><button class="btn pri" id="nx" hidden>' + (qi === QUIZ.length - 1 ? U.seeScore : U.next) + '</button>';
+  const mark = j => { $$('.opt').forEach(x => { x.disabled = true; if (+x.dataset.j === k.a) x.classList.add('ok'); }); if (j !== k.a) $$('.opt')[j].classList.add('no'); $('.why').textContent = (j === k.a ? U.ok : U.no) + k.w[lang]; $('#nx').hidden = false; };
+  $$('.opt').forEach(b => b.onclick = () => { const j = +b.dataset.j; answered = j; if (j === k.a) sc++; mark(j); });
+  if (answered >= 0) mark(answered);                               // keep the answered state when the language is switched
+  $('#nx').onclick = () => { qi++; answered = -1; showQ(); };
+}
+function renderAll() { applyStatic(); renderStages(); renderCards(); renderTerms(); showQ(); first = false; }
+function setLang(l) { lang = l; store.set('hub.lang', l); renderAll(); }
+$('#lang').onclick = () => setLang(lang === 'en' ? 'bm' : 'en');
+renderAll();
 
 /* counters */
 function count(sel, to) { const el = $(sel), t0 = performance.now(); (function f(t) { const k = Math.min(1, (t - t0) / 800); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(t0); }
@@ -300,7 +389,7 @@ setTheme(store.get('hub.theme', matchMedia('(prefers-color-scheme: light)').matc
 const flip = () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
 $('#theme').onclick = flip;
 $('#rand').onclick = () => { const m = SIMS[Math.floor(Math.random() * SIMS.length)]; window.open(m.live, '_blank', 'noopener'); };
-addEventListener('keydown', e => { if (e.ctrlKey || e.metaKey || e.altKey) return; const typing = /input|textarea/i.test(document.activeElement.tagName); if (e.key === 'Escape') { $('#q').value = ''; $('#q').blur(); apply(); return; } if (typing) return; if (e.key === '/') { e.preventDefault(); $('#sims').scrollIntoView(); $('#q').focus(); } else if (e.key.toLowerCase() === 't') flip(); });
+addEventListener('keydown', e => { if (e.ctrlKey || e.metaKey || e.altKey) return; const typing = /input|textarea/i.test(document.activeElement.tagName); if (e.key === 'Escape') { $('#q').value = ''; $('#q').blur(); apply(); return; } if (typing) return; if (e.key === '/') { e.preventDefault(); $('#sims').scrollIntoView(); $('#q').focus(); } else if (e.key.toLowerCase() === 't') flip(); else if (e.key.toLowerCase() === 'l') setLang(lang === 'en' ? 'bm' : 'en'); });
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) $$('.links a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
 ['path', 'sims', 'glossary', 'quiz'].forEach(id => io.observe(document.getElementById(id)));
 
